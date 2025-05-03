@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/contacts")
 public class ContactController {
@@ -21,6 +23,16 @@ public class ContactController {
         Contact savedContact = contactService.saveContact(contact);
         return ResponseEntity.ok().body(
                 new ResponseMessage(savedContact.getId(), "Contact saved successfully")
+        );
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<?> saveContacts(@Valid @RequestBody List<Contact> contacts) {
+        List<Contact> savedContacts = contactService.saveContacts(contacts);
+        return ResponseEntity.ok().body(
+                savedContacts.stream()
+                        .map(c -> new ResponseMessage(c.getId(), "Contact saved successfully"))
+                        .toList()
         );
     }
 
