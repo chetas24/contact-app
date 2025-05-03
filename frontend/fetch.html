@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h2>Fetch Contact by ID</h2>
+<form id="fetchContactForm">
+    <input type="number" id="contactId" name="contactId" min="1" placeholder="Contact ID" required>
+    <button type="submit">Fetch</button>
+</form>
+<div id="fetchResult"></div>
+<script>
+    document.getElementById('fetchContactForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const id = document.getElementById('contactId').value;
+        const resultDiv = document.getElementById('fetchResult');
+        resultDiv.innerText = 'Loading...';
+        try {
+            const response = await fetch(`http://localhost:8082/contacts/${id}`);
+            if (!response.ok) {
+                const error = await response.text();
+                throw new Error(error);
+            }
+            const contact = await response.json();
+            resultDiv.innerHTML = `
+                <strong>Name:</strong> ${contact.name}<br>
+                <strong>Phone:</strong> ${contact.phoneNum}<br>
+                <strong>Birthday:</strong> ${contact.birthday}
+            `;
+        } catch (err) {
+            resultDiv.innerText = 'Error: ' + err.message;
+        }
+    };
+</script>
+</body>
+</html>

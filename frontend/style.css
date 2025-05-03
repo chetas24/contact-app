@@ -53,3 +53,17 @@ button:hover {
     font-weight: bold;
     text-align: center;
 }
+@media (max-width: 480px) {
+    form {
+        min-width: unset;
+        width: 95vw;
+        padding: 1em 0.5em;
+    }
+    input, button {
+        font-size: 1em;
+        padding: 0.7em 0.5em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+}
