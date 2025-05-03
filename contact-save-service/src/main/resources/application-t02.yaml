@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/contactdb
+    url: jdbc:postgresql://localhost:5432/contactdb_t02
     username: admin
     password: admin
   jpa:
