@@ -13,19 +13,15 @@ read inputProfile
 case "$inputProfile" in
   t01)
     PROFILE="t01"
-    BRANCH="develop"
     ;;
   t02)
     PROFILE="t02"
-    BRANCH="develop-release"
     ;;
   t03)
     PROFILE="t03"
-    BRANCH="staging"
     ;;
   prod)
     PROFILE="prod"
-    BRANCH="master"
     ;;
   *)
     echo "Invalid profile. Please enter one of: t01, t02, t03, prod."
@@ -33,13 +29,7 @@ case "$inputProfile" in
     ;;
 esac
 
-# Switch to the corresponding branch
-echo "Switching to branch: $BRANCH"
-git checkout $BRANCH
-if [ $? -ne 0 ]; then
-  echo "Failed to switch to branch $BRANCH."
-  exit 2
-fi
+# Branch switching removed -- perform manual branch switching if needed.
 
 (
   cd contact-fetch-service
@@ -68,4 +58,4 @@ if [ $SAVE_STATUS -ne 0 ]; then
   exit 4
 fi
 
-echo "Started contact-fetch-service and contact-save-service on branch $BRANCH with profile: $PROFILE"
+echo "Started contact-fetch-service and contact-save-service with profile: $PROFILE"
