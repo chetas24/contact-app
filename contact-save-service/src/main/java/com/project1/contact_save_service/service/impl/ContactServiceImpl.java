@@ -5,6 +5,8 @@ import com.project1.contact_save_service.repository.ContactRepository;
 import com.project1.contact_save_service.service.ContactService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ContactServiceImpl implements ContactService {
 
@@ -17,5 +19,10 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Contact saveContact(Contact contact) {
         return contactRepository.save(contact);
+    }
+
+    @Override
+    public List<Contact> saveContacts(List<Contact> contacts) {
+        return contactRepository.saveAll(contacts); // Bulk save
     }
 }
