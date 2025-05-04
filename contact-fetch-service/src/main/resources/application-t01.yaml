@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: t01
   datasource:
     url: jdbc:postgresql://localhost:5432/contactdb_t01
     username: admin
